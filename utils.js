@@ -6,6 +6,14 @@ var _ = require('busyman'),
 
 var zutils = {};
 
+zutils.isBroadcast = function(nwkAddr){
+    if(typeof nwkAddr === 'string'){
+        if(nwkAddr.startsWith("0x")) nwkAddr = nwkAddr.substr(0,2)
+        nwkAddr = parseInt(nwkAddr, 16)
+    }
+    return nwkAddr == 0xffff || nwkAddr == 0xfffd
+}
+
 zutils.toHexString = function (val, type) {
     var string,
         niplen = parseInt(type.slice(4)) / 4;
